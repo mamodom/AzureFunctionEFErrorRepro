@@ -5,6 +5,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace FunctionApp1
@@ -14,6 +15,7 @@ namespace FunctionApp1
         [FunctionName("Function1")]
         public static IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequest req, TraceWriter log)
         {
+            log.Info(typeof(DbContext).AssemblyQualifiedName);
             log.Info("C# HTTP trigger function processed a request.");
 
             string name = req.Query["name"];
